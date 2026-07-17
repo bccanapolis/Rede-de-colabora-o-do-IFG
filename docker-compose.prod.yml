@@ -30,6 +30,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.colaboracao-api-web.rule=Host(`colaboracao.bcc2.ifg.edu.br`) && (PathPrefix(`/api`) || PathPrefix(`/admin`) || PathPrefix(`/static`))"
+      - "traefik.http.routers.colaboracao-api-web.entrypoints=web"
+      - "traefik.http.routers.colaboracao-api-web.priority=10"
+      - "traefik.http.routers.colaboracao-api-web.middlewares=redirect-to-https@file"
+      - "traefik.http.routers.colaboracao-api-web.service=colaboracao-api-web"
+      - "traefik.http.services.colaboracao-api-web.loadbalancer.server.port=8000"
+
+      - "traefik.http.routers.colaboracao-api-websecure.rule=Host(`colaboracao.bcc2.ifg.edu.br`) && (PathPrefix(`/api`) || PathPrefix(`/admin`) || PathPrefix(`/static`))"
+      - "traefik.http.routers.colaboracao-api-websecure.entrypoints=websecure"
+      - "traefik.http.routers.colaboracao-api-websecure.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.colaboracao-api-websecure.priority=10"
+      - "traefik.http.routers.colaboracao-api-websecure.service=colaboracao-api-websecure"
+      - "traefik.http.services.colaboracao-api-websecure.loadbalancer.server.port=8000"
     restart: unless-stopped
     networks:
       - default
@@ -41,6 +57,21 @@ services:
     depends_on:
       backend:
         condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.colaboracao-web-web.rule=Host(`chat.radarinternet.com.br`)"
+      - "traefik.http.routers.colaboracao-web-web.entrypoints=web"
+      - "traefik.http.routers.colaboracao-web-web.priority=1"
+      - "traefik.http.routers.colaboracao-web-web.middlewares=redirect-to-https@file"
+      - "traefik.http.routers.colaboracao-web-websecure.service=colaboracao-web-web"
+      - "traefik.http.services.colaboracao-web-web.loadbalancer.server.port=80"
+
+      - "traefik.http.routers.colaboracao-web-websecure.rule=Host(`chat.radarinternet.com.br`)"
+      - "traefik.http.routers.colaboracao-web-websecure.entrypoints=websecure"
+      - "traefik.http.routers.colaboracao-web-websecure.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.colaboracao-web-websecure.priority=1"
+      - "traefik.http.routers.colaboracao-web-websecure.service=colaboracao-web-websecure"
+      - "traefik.http.services.colaboracao-web-websecure.loadbalancer.server.port=80"
     restart: unless-stopped
     networks:
       - default
