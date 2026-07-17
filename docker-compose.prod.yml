@@ -18,7 +18,6 @@ services:
 
   backend:
     build: ./backend
-    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers "${GUNICORN_WORKERS:-3}"
     volumes:
       - ./data:/data:ro
       - static_files:/app/staticfiles
