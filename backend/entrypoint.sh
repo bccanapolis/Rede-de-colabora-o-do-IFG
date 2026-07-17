@@ -20,13 +20,13 @@ else
   echo "Banco já populado ($COUNT pesquisadores) — pulando import."
 fi
 
-if [ "$DEBUG" = "True" ]; then
-  echo "Iniciando servidor de desenvolvimento..."
-  exec python manage.py runserver 0.0.0.0:8000
-else
-  echo "Coletando arquivos estáticos..."
-  python manage.py collectstatic --noinput
+# if [ "$DEBUG" = "True" ]; then
+#   echo "Iniciando servidor de desenvolvimento..."
+#   exec python manage.py runserver 0.0.0.0:8000
+# else
+#   echo "Coletando arquivos estáticos..."
+#   python manage.py collectstatic --noinput
 
-  echo "Iniciando gunicorn..."
-  exec gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers "${GUNICORN_WORKERS:-3}"
-fi
+#   echo "Iniciando gunicorn..."
+#   exec gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers "${GUNICORN_WORKERS:-3}"
+# fi
