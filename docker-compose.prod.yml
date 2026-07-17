@@ -63,7 +63,7 @@ services:
       - "traefik.http.routers.colaboracao-web-web.entrypoints=web"
       - "traefik.http.routers.colaboracao-web-web.priority=1"
       - "traefik.http.routers.colaboracao-web-web.middlewares=redirect-to-https@file"
-      - "traefik.http.routers.colaboracao-web-websecure.service=colaboracao-web-web"
+      - "traefik.http.routers.colaboracao-web-web.service=colaboracao-web-web"
       - "traefik.http.services.colaboracao-web-web.loadbalancer.server.port=80"
 
       - "traefik.http.routers.colaboracao-web-websecure.rule=Host(`colaboracao.bcc2.ifg.edu.br`)"
