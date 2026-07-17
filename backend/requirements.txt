@@ -1,0 +1,10 @@
+Django==5.0.6
+djangorestframework==3.15.2
+psycopg2-binary==2.9.9
+django-cors-headers==4.4.0
+networkx==3.3
+pandas==2.2.2
+python-dotenv==1.0.1
+gunicorn==22.0.0
+python-louvain==0.16
+whitenoise==6.7.0
