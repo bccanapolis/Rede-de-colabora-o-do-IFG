@@ -25,6 +25,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health/ || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     restart: unless-stopped
     networks:
       - default
@@ -34,7 +39,10 @@ services:
       context: ./frontend
       target: production
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+    ports: 
+      - "3000:80"
     restart: unless-stopped
     networks:
       - default
