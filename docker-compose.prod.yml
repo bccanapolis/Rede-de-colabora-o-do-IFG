@@ -33,6 +33,7 @@ services:
 
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
       - "traefik.http.routers.colaboracao-api-web.rule=Host(`colaboracao.bcc2.ifg.edu.br`) && (PathPrefix(`/api`) || PathPrefix(`/admin`) || PathPrefix(`/static`))"
       - "traefik.http.routers.colaboracao-api-web.entrypoints=web"
       - "traefik.http.routers.colaboracao-api-web.priority=10"
@@ -59,6 +60,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
       - "traefik.http.routers.colaboracao-web-web.rule=Host(`colaboracao.bcc2.ifg.edu.br`)"
       - "traefik.http.routers.colaboracao-web-web.entrypoints=web"
       - "traefik.http.routers.colaboracao-web-web.priority=1"
