@@ -59,14 +59,14 @@ services:
         condition: service_healthy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.colaboracao-web-web.rule=Host(`chat.radarinternet.com.br`)"
+      - "traefik.http.routers.colaboracao-web-web.rule=Host(`colaboracao.bcc2.ifg.edu.br`)"
       - "traefik.http.routers.colaboracao-web-web.entrypoints=web"
       - "traefik.http.routers.colaboracao-web-web.priority=1"
       - "traefik.http.routers.colaboracao-web-web.middlewares=redirect-to-https@file"
       - "traefik.http.routers.colaboracao-web-websecure.service=colaboracao-web-web"
       - "traefik.http.services.colaboracao-web-web.loadbalancer.server.port=80"
 
-      - "traefik.http.routers.colaboracao-web-websecure.rule=Host(`chat.radarinternet.com.br`)"
+      - "traefik.http.routers.colaboracao-web-websecure.rule=Host(`colaboracao.bcc2.ifg.edu.br`)"
       - "traefik.http.routers.colaboracao-web-websecure.entrypoints=websecure"
       - "traefik.http.routers.colaboracao-web-websecure.tls.certresolver=letsencrypt"
       - "traefik.http.routers.colaboracao-web-websecure.priority=1"
