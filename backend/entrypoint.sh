@@ -1,6 +1,12 @@
 #!/bin/sh
 set -e
 
+DB_HOST="${DB_HOST:-db}"
+DB_PORT="${DB_PORT:-5432}"
+DB_NAME="${DB_NAME:-ifg_rede}"
+DB_USER="${DB_USER:-ifg}"
+DB_PASSWORD="${DB_PASSWORD:-ifgpass}"
+
 echo "Aplicando migrações..."
 python manage.py migrate --noinput
 
