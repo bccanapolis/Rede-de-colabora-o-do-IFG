@@ -33,7 +33,6 @@ services:
     build:
       context: ./frontend
       target: production
-
     depends_on:
       - backend
     restart: unless-stopped
@@ -43,3 +42,7 @@ services:
 volumes:
   postgres_data:
   static_files:
+
+networks:
+  default:
+    driver: bridge
